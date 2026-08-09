@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Login - SkillMatch</title>
+  <link rel="stylesheet" href="/static/style.css">
+  <link rel="stylesheet" href="/static/auth.css">
+</head>
+<body>
+  <nav class="navbar">
+    <a href="/" class="logo">Skill<span>Match</span></a>
+  </nav>
+  <main class="auth-wrapper">
+    <div class="auth-card">
+      <h2 class="auth-title">Log In</h2>
+      <p class="auth-subtitle">Enter your details to view recommendations</p>
+      <form id="loginForm">
+        <div class="form-group">
+          <label>Email Address</label>
+          <input type="email" id="email" class="glow-input" required>
+        </div>
+        <div class="form-group">
+          <label>Password</label>
+          <div style="position: relative;">
+            <input type="password" id="password" class="glow-input" required style="padding-right: 2.75rem;">
+            <button type="button" onclick="togglePasswordVisibility('password', this)" style="position: absolute; right: 0.75rem; top: 50%; transform: translateY(-50%); background: none; border: none; color: var(--text-muted); cursor: pointer; font-size: 1.1rem;" title="Toggle Password Visibility">👁️</button>
+          </div>
+        </div>
+
+        <button type="submit" class="btn-indigo" style="width: 100%;">Log In</button>
+        <div style="text-align: center; margin: 1.25rem 0 1rem 0; color: var(--text-muted); font-size: 0.875rem;">Don't have an account?</div>
+        <a href="/register" class="btn-outline" style="display: block; text-align: center; width: 100%; text-decoration: none;">Register New Account</a>
+      </form>
+    </div>
+
+  </main>
+  <script src="/static/main.js"></script>
+</body>
+</html>

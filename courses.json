@@ -1,0 +1,62 @@
+[
+  {
+    "title": "Full-Stack Web Development Bootcamp",
+    "instructor": "Alex Carter",
+    "description": "Master modern web development using HTML, CSS, JavaScript, Node.js, and PostgreSQL. Build responsive web apps from scratch.",
+    "skill_requirements": "HTML, CSS, JavaScript, Node.js, PostgreSQL"
+  },
+  {
+    "title": "Advanced Python for Data Science",
+    "instructor": "Dr. Emily Chen",
+    "description": "Learn data analysis, visualization, and manipulation with Python, Pandas, NumPy, and Matplotlib for real-world analytical tasks.",
+    "skill_requirements": "Python, Pandas, NumPy, Data Analysis"
+  },
+  {
+    "title": "AI & Machine Learning Specialization",
+    "instructor": "Sophia Lee",
+    "description": "Comprehensive introduction to artificial intelligence, neural networks, supervised/unsupervised learning using TensorFlow and PyTorch.",
+    "skill_requirements": "Python, Machine Learning, TensorFlow, Deep Learning"
+  },
+  {
+    "title": "Mastering SQL & Database Design",
+    "instructor": "Sam Wilson",
+    "description": "Deep dive into relational database design, complex SQL queries, index optimization, and PostgreSQL administration.",
+    "skill_requirements": "SQL, PostgreSQL, Database Design"
+  },
+  {
+    "title": "UI/UX Design & Prototyping Fundamentals",
+    "instructor": "Maya Patel",
+    "description": "Learn user-centered interface design, wireframing, component design systems, and interactive prototyping using Figma.",
+    "skill_requirements": "UI/UX, Figma, Prototyping, Design Systems"
+  },
+  {
+    "title": "Cloud Computing Essentials with AWS",
+    "instructor": "Chris Evans",
+    "description": "Architect and deploy scalable cloud applications on Amazon Web Services (AWS) using EC2, S3, RDS, and Docker containers.",
+    "skill_requirements": "Cloud Computing, AWS, Docker, DevOps"
+  },
+  {
+    "title": "Cybersecurity & Ethical Hacking",
+    "instructor": "Marcus Vance",
+    "description": "Understand network security fundamentals, vulnerability assessment, penetration testing, and secure coding practices.",
+    "skill_requirements": "Cybersecurity, Networking, Ethical Hacking, Linux"
+  },
+  {
+    "title": "Cross-Platform Mobile App Development",
+    "instructor": "Jordan Taylor",
+    "description": "Build high-performance native iOS and Android mobile applications using Flutter and Dart programming.",
+    "skill_requirements": "Mobile Dev, Flutter, Dart, Mobile Architecture"
+  },
+  {
+    "title": "Algorithms & Data Structures in Python",
+    "instructor": "Dr. Alan Turing",
+    "description": "Master fundamental computer science algorithms, dynamic programming, tree traversals, and Big-O computational complexity.",
+    "skill_requirements": "Python, Data Structures, Algorithms"
+  },
+  {
+    "title": "DevOps Continuous Integration & Delivery",
+    "instructor": "Elena Rostova",
+    "description": "Automate modern software deployments using Git, Docker, Kubernetes, GitHub Actions, and CI/CD pipelines.",
+    "skill_requirements": "Git, Docker, Kubernetes, CI/CD"
+  }
+]

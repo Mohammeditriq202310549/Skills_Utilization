@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Courses - SkillMatch</title>
+  <link rel="stylesheet" href="/static/style.css">
+  <link rel="stylesheet" href="/static/courses.css">
+</head>
+<body>
+  <nav class="navbar">
+    <a href="/" class="logo">Skill<span>Match</span></a>
+    <ul class="nav-links">
+      <li><a href="/courses" class="active">Courses</a></li>
+      <li><a href="/recommendations">Recommendations</a></li>
+      <li><a href="/profile">Profile</a></li>
+    </ul>
+  </nav>
+  <main class="main-container">
+    <input type="text" id="searchInput" class="search-box" placeholder="Search courses or skills...">
+    <div class="grid-layout" id="courseGrid"></div>
+  </main>
+  <script src="/static/main.js"></script>
+</body>
+</html>
