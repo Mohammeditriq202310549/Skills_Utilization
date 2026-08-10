@@ -10,11 +10,16 @@
 <body>
   <nav class="navbar">
     <a href="/" class="logo">Skill<span>Match</span></a>
-    <ul class="nav-links">
-      <li><a href="/courses">Courses</a></li>
-      <li><a href="/recommendations">Recommendations</a></li>
-      <li><a href="/profile" class="active">Profile</a></li>
-    </ul>
+    <div style="display: flex; align-items: center; gap: 1.5rem;">
+      <ul class="nav-links">
+        <li><a href="/courses">Courses</a></li>
+        <li><a href="/recommendations">Recommendations</a></li>
+        <li><a href="/profile" class="active">Profile</a></li>
+      </ul>
+      <button onclick="toggleTheme()" class="btn-outline" style="padding: 0.4rem 0.85rem; font-size: 0.85rem; display: flex; align-items: center; gap: 0.4rem; border-radius: 2rem;" title="Toggle Dark / Light Mode">
+        <span id="themeToggleIcon">🌙</span> <span id="themeToggleLabel">Dark</span>
+      </button>
+    </div>
   </nav>
   <main class="main-container">
     <div class="glass-card" id="profileCard"></div>

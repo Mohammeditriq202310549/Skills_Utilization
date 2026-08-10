@@ -44,7 +44,7 @@
 .glow-input {
   width: 100%;
   padding: 0.875rem 1.125rem;
-  background: rgba(15, 23, 42, 0.7);
+  background: var(--input-bg);
   border: 0.0625rem solid var(--border-glass);
   border-radius: var(--radius-md);
   color: var(--text-main);
@@ -59,7 +59,7 @@
 }
 
 .skill-chip {
-  background: rgba(15, 23, 42, 0.7);
+  background: var(--input-bg);
   border: 0.0625rem solid var(--border-glass);
   color: var(--text-muted);
   padding: 0.5rem 0.875rem;

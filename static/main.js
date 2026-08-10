@@ -1,3 +1,29 @@
+// Theme Management (Dark / Light)
+function initTheme() {
+  const savedTheme = localStorage.getItem('theme') || 'dark';
+  document.documentElement.setAttribute('data-theme', savedTheme);
+  updateThemeButtonUI(savedTheme);
+}
+
+function updateThemeButtonUI(theme) {
+  const label = document.getElementById('themeToggleLabel');
+  const icon = document.getElementById('themeToggleIcon');
+  if (label) label.textContent = theme === 'light' ? 'Light' : 'Dark';
+  if (icon) icon.textContent = theme === 'light' ? '☀️' : '🌙';
+}
+
+function toggleTheme() {
+  const currentTheme = document.documentElement.getAttribute('data-theme') || 'dark';
+  const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+  document.documentElement.setAttribute('data-theme', newTheme);
+  localStorage.setItem('theme', newTheme);
+  updateThemeButtonUI(newTheme);
+}
+
+// Run theme setup immediately
+initTheme();
+document.addEventListener('DOMContentLoaded', initTheme);
+
 function getAuthHeader() {
   const token = localStorage.getItem('token');
   return token ? { 'Authorization': `Bearer ${token}` } : {};
@@ -281,8 +307,8 @@ async function loadProfile() {
     </div>
 
     <!-- Hidden Edit Profile Form -->
-    <div id="editProfileContainer" style="display: none; background: rgba(15, 23, 42, 0.75); padding: 1.5rem; border-radius: var(--radius-md); border: 0.0625rem solid var(--border-focus); margin-bottom: 1.5rem;">
-      <h3 style="font-size: 1.1rem; font-weight: 700; margin-bottom: 1rem;">Edit Profile Info</h3>
+    <div id="editProfileContainer" style="display: none; background: var(--subcard-bg); padding: 1.5rem; border-radius: var(--radius-md); border: 0.0625rem solid var(--border-focus); margin-bottom: 1.5rem;">
+      <h3 style="font-size: 1.1rem; font-weight: 700; margin-bottom: 1rem; color: var(--text-main);">Edit Profile Info</h3>
       <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr)); gap: 1rem; margin-bottom: 1rem;">
         <div>
           <label style="font-size: 0.85rem; color: var(--text-muted); display: block; margin-bottom: 0.4rem;">Email Address</label>
@@ -308,8 +334,8 @@ async function loadProfile() {
     </div>
 
     <!-- Hidden Change Password Form -->
-    <div id="changePasswordContainer" style="display: none; background: rgba(15, 23, 42, 0.8); padding: 1.5rem; border-radius: var(--radius-md); border: 0.0625rem solid rgba(168, 85, 247, 0.4); margin-bottom: 1.5rem;">
-      <h3 style="font-size: 1.1rem; font-weight: 700; margin-bottom: 1rem; color: #e9d5ff;">🔑 Change Account Password</h3>
+    <div id="changePasswordContainer" style="display: none; background: var(--subcard-bg); padding: 1.5rem; border-radius: var(--radius-md); border: 0.0625rem solid rgba(168, 85, 247, 0.4); margin-bottom: 1.5rem;">
+      <h3 style="font-size: 1.1rem; font-weight: 700; margin-bottom: 1rem; color: var(--text-main);">🔑 Change Account Password</h3>
       <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr)); gap: 1rem; margin-bottom: 1rem;">
         <div>
           <label style="font-size: 0.85rem; color: var(--text-muted); display: block; margin-bottom: 0.4rem;">Current (Old) Password</label>
@@ -334,29 +360,29 @@ async function loadProfile() {
 
 
     <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr)); gap: 1rem; margin-bottom: 1.5rem;">
-      <div style="background: rgba(15, 23, 42, 0.5); padding: 1rem; border-radius: var(--radius-md); border: 0.0625rem solid var(--border-glass);">
+      <div style="background: var(--subcard-bg); padding: 1rem; border-radius: var(--radius-md); border: 0.0625rem solid var(--border-glass);">
         <div style="font-size: 0.8rem; color: var(--text-muted);">Major</div>
-        <div style="font-weight: 600; margin-top: 0.25rem;">${u.major || 'Not specified'}</div>
+        <div style="font-weight: 600; margin-top: 0.25rem; color: var(--text-main);">${u.major || 'Not specified'}</div>
       </div>
-      <div style="background: rgba(15, 23, 42, 0.5); padding: 1rem; border-radius: var(--radius-md); border: 0.0625rem solid var(--border-glass);">
+      <div style="background: var(--subcard-bg); padding: 1rem; border-radius: var(--radius-md); border: 0.0625rem solid var(--border-glass);">
         <div style="font-size: 0.8rem; color: var(--text-muted);">Age</div>
-        <div style="font-weight: 600; margin-top: 0.25rem;">${u.age ? u.age + ' years' : 'Not specified'}</div>
+        <div style="font-weight: 600; margin-top: 0.25rem; color: var(--text-main);">${u.age ? u.age + ' years' : 'Not specified'}</div>
       </div>
-      <div style="background: rgba(15, 23, 42, 0.5); padding: 1rem; border-radius: var(--radius-md); border: 0.0625rem solid var(--border-glass);">
+      <div style="background: var(--subcard-bg); padding: 1rem; border-radius: var(--radius-md); border: 0.0625rem solid var(--border-glass);">
         <div style="font-size: 0.8rem; color: var(--text-muted);">Phone</div>
-        <div style="font-weight: 600; margin-top: 0.25rem;">${u.phone || 'Not specified'}</div>
+        <div style="font-weight: 600; margin-top: 0.25rem; color: var(--text-main);">${u.phone || 'Not specified'}</div>
       </div>
     </div>
 
     <div style="margin-bottom: 2rem;">
       <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem;">
-        <h3 style="font-size: 1.1rem;">Selected Skills & Interests</h3>
+        <h3 style="font-size: 1.1rem; color: var(--text-main);">Selected Skills & Interests</h3>
         <button onclick="toggleAddSkillForm()" class="btn-indigo" style="font-size: 0.85rem; padding: 0.4rem 0.9rem;">➕ Add New Skill</button>
       </div>
 
       <!-- Hidden inline Add Skill Form -->
-      <div id="addSkillContainer" style="display: none; background: rgba(15, 23, 42, 0.7); padding: 1.25rem; border-radius: var(--radius-md); border: 0.0625rem solid var(--border-focus); margin-bottom: 1.25rem;">
-        <h4 style="font-size: 0.95rem; margin-bottom: 0.75rem;">Add a Skill to Your Career Profile</h4>
+      <div id="addSkillContainer" style="display: none; background: var(--subcard-bg); padding: 1.25rem; border-radius: var(--radius-md); border: 0.0625rem solid var(--border-focus); margin-bottom: 1.25rem;">
+        <h4 style="font-size: 0.95rem; margin-bottom: 0.75rem; color: var(--text-main);">Add a Skill to Your Career Profile</h4>
         <div style="display: flex; gap: 0.75rem; flex-wrap: wrap;">
           <input type="text" id="newSkillName" class="glow-input" placeholder="Skill name (e.g. Cybersecurity, Flutter, Python...)" style="flex: 2; min-width: 12rem;">
           <select id="newSkillProficiency" class="glow-input" style="flex: 1; min-width: 8rem;">
@@ -382,19 +408,19 @@ async function loadProfile() {
 
     <!-- Enrolled Courses Section -->
     <div style="border-top: 0.0625rem solid var(--border-glass); padding-top: 1.5rem; margin-top: 1.5rem;">
-      <h3 style="font-size: 1.2rem; font-weight: 700; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem;">
+      <h3 style="font-size: 1.2rem; font-weight: 700; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem; color: var(--text-main);">
         🎓 Enrolled Courses <span style="font-size: 0.8rem; color: var(--primary-indigo); background: rgba(99, 102, 241, 0.15); padding: 0.2rem 0.5rem; border-radius: 1rem;">${enrolledList.length}</span>
       </h3>
 
       ${enrolledList.length > 0
         ? `<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr)); gap: 1rem;">
             ${enrolledList.map(c => `
-              <div style="background: rgba(15, 23, 42, 0.6); border: 0.0625rem solid var(--border-glass); padding: 1.25rem; border-radius: var(--radius-md); display: flex; flex-direction: column; justify-content: space-between;">
+              <div style="background: var(--subcard-bg); border: 0.0625rem solid var(--border-glass); padding: 1.25rem; border-radius: var(--radius-md); display: flex; flex-direction: column; justify-content: space-between;">
                 <div>
-                  <h4 style="font-size: 1.05rem; margin-bottom: 0.3rem; color: #fff;">${c.title}</h4>
+                  <h4 style="font-size: 1.05rem; margin-bottom: 0.3rem; color: var(--text-main);">${c.title}</h4>
                   <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0.5rem;">Instructor: ${c.instructor}</p>
-                  <p style="font-size: 0.85rem; color: #cbd5e1; margin-bottom: 0.75rem; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;">${c.description || ''}</p>
-                  <span style="font-size: 0.75rem; color: #4ade80; display: block; margin-bottom: 0.75rem;">Enrolled on: ${c.enrolled_at || 'Recently'}</span>
+                  <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0.75rem; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;">${c.description || ''}</p>
+                  <span style="font-size: 0.75rem; color: var(--accent-emerald); display: block; margin-bottom: 0.75rem;">Enrolled on: ${c.enrolled_at || 'Recently'}</span>
                 </div>
                 <div style="display: flex; gap: 0.5rem;">
                   <a href="/course-details?id=${c.id}" class="btn-outline" style="font-size: 0.75rem; padding: 0.35rem 0.6rem; flex: 1; text-align: center; text-decoration: none;">View</a>
@@ -403,7 +429,7 @@ async function loadProfile() {
               </div>
             `).join('')}
           </div>`
-        : `<div style="background: rgba(15, 23, 42, 0.4); border: 0.0625rem dashed var(--border-glass); padding: 2rem; border-radius: var(--radius-md); text-align: center;">
+        : `<div style="background: var(--subcard-bg); border: 0.0625rem dashed var(--border-glass); padding: 2rem; border-radius: var(--radius-md); text-align: center;">
             <p style="color: var(--text-muted); margin-bottom: 1rem;">You haven't enrolled in any courses yet.</p>
             <a href="/courses" class="btn-indigo" style="font-size: 0.85rem; padding: 0.5rem 1rem; text-decoration: none; display: inline-block;">Browse Courses</a>
           </div>`
@@ -574,13 +600,13 @@ async function loadCourseDetails() {
   card.innerHTML = `
     <div style="margin-bottom: 1.5rem;">
       <a href="javascript:history.back()" style="color: var(--text-muted); text-decoration: none; font-size: 0.9rem; display: inline-flex; align-items: center; gap: 0.3rem; margin-bottom: 1rem;">← Back</a>
-      <h1 style="font-size: 2rem; font-weight: 800; margin-bottom: 0.5rem; background: linear-gradient(135deg, #fff, #94a3b8); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">${c.title}</h1>
+      <h1 style="font-size: 2rem; font-weight: 800; margin-bottom: 0.5rem; color: var(--text-main);">${c.title}</h1>
       <p style="color: var(--primary-indigo); font-weight: 600; font-size: 1.05rem;">Instructor: ${c.instructor}</p>
     </div>
 
-    <div style="background: rgba(15, 23, 42, 0.5); padding: 1.5rem; border-radius: var(--radius-md); border: 0.0625rem solid var(--border-glass); margin-bottom: 1.5rem;">
-      <h3 style="font-size: 1.1rem; margin-bottom: 0.75rem;">Course Description</h3>
-      <p style="line-height: 1.7; color: #cbd5e1;">${c.description || 'No detailed description available.'}</p>
+    <div style="background: var(--subcard-bg); padding: 1.5rem; border-radius: var(--radius-md); border: 0.0625rem solid var(--border-glass); margin-bottom: 1.5rem;">
+      <h3 style="font-size: 1.1rem; margin-bottom: 0.75rem; color: var(--text-main);">Course Description</h3>
+      <p style="line-height: 1.7; color: var(--text-muted);">${c.description || 'No detailed description available.'}</p>
     </div>
 
     <div style="margin-bottom: 2rem;">
