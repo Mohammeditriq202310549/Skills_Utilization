@@ -16,9 +16,23 @@
     </ul>
   </nav>
   <main class="main-container">
-    <input type="text" id="searchInput" class="search-box" placeholder="Search courses or skills...">
+    <input type="text" id="searchInput" class="search-box" placeholder="🔍 Search courses, instructors, or skill keywords...">
+
+    <div class="category-filters" id="categoryFilters" style="display: flex; flex-wrap: wrap; gap: 0.6rem; margin-bottom: 2rem;">
+      <button type="button" class="filter-btn active" data-category="all">All Courses</button>
+      <button type="button" class="filter-btn" data-category="frontend">⚡ Frontend</button>
+      <button type="button" class="filter-btn" data-category="backend">⚙️ Backend</button>
+      <button type="button" class="filter-btn" data-category="hacking">🛡️ Hacking / Cybersecurity</button>
+      <button type="button" class="filter-btn" data-category="ai">🤖 AI & Machine Learning</button>
+      <button type="button" class="filter-btn" data-category="design">🎨 UI/UX Design</button>
+      <button type="button" class="filter-btn" data-category="database">🗄️ Database</button>
+      <button type="button" class="filter-btn" data-category="devops">☁️ Cloud & DevOps</button>
+      <button type="button" class="filter-btn" data-category="mobile">📱 Mobile Dev</button>
+    </div>
+
     <div class="grid-layout" id="courseGrid"></div>
   </main>
+
   <script src="/static/main.js"></script>
 </body>
 </html>

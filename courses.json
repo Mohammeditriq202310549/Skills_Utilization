@@ -1,62 +1,489 @@
 [
   {
     "title": "Full-Stack Web Development Bootcamp",
-    "instructor": "Alex Carter",
-    "description": "Master modern web development using HTML, CSS, JavaScript, Node.js, and PostgreSQL. Build responsive web apps from scratch.",
-    "skill_requirements": "HTML, CSS, JavaScript, Node.js, PostgreSQL"
+    "description": "Master HTML5, CSS3, JavaScript ES6+, and modern web deployment tools.",
+    "instructor": "Sarah Jenkins",
+    "skill_requirements": "HTML, CSS, JavaScript, Web, Frontend"
   },
   {
-    "title": "Advanced Python for Data Science",
-    "instructor": "Dr. Emily Chen",
-    "description": "Learn data analysis, visualization, and manipulation with Python, Pandas, NumPy, and Matplotlib for real-world analytical tasks.",
-    "skill_requirements": "Python, Pandas, NumPy, Data Analysis"
+    "title": "Modern React 18 & Next.js Masterclass",
+    "description": "Build high-performance SSR and SSG web applications using React 18 and Next.js App Router.",
+    "instructor": "Dan Abramov",
+    "skill_requirements": "React, JavaScript, Next.js, Frontend"
   },
+  {
+    "title": "Advanced JavaScript: ES6+ & Async Patterns",
+    "description": "Master asynchronous JavaScript, Promises, async/await, Event Loop, and Closure patterns.",
+    "instructor": "Kyle Simpson",
+    "skill_requirements": "JavaScript, ES6, Async, Frontend"
+  },
+  {
+    "title": "CSS3 Animations, Grid & Flexbox Magic",
+    "description": "Create modern glassmorphism layouts, fluid grids, and CSS keyframe animations.",
+    "instructor": "Rachel Andrew",
+    "skill_requirements": "CSS, Flexbox, CSS Grid, Frontend"
+  },
+  {
+    "title": "Vue.js 3 Enterprise Applications",
+    "description": "Build reactive single-page applications using Vue 3 Composition API, Pinia, and Vue Router.",
+    "instructor": "Evan You",
+    "skill_requirements": "Vue.js, JavaScript, Frontend, Web"
+  },
+  {
+    "title": "Angular & TypeScript Master Engineering",
+    "description": "Enterprise web architecture using Angular 16, RxJS, Signals, and Ngrx state management.",
+    "instructor": "Minko Gechev",
+    "skill_requirements": "Angular, TypeScript, Frontend"
+  },
+  {
+    "title": "Svelte & SvelteKit Fast-Track",
+    "description": "Compiler-driven UI components and fast web routing using SvelteKit.",
+    "instructor": "Rich Harris",
+    "skill_requirements": "Svelte, JavaScript, Frontend"
+  },
+  {
+    "title": "Responsive Web Design with Tailwind CSS",
+    "description": "Rapid UI building using Tailwind utility-first CSS framework and custom design tokens.",
+    "instructor": "Adam Wathan",
+    "skill_requirements": "Tailwind CSS, HTML, CSS, Frontend"
+  },
+  {
+    "title": "Web Performance Optimization & PWA",
+    "description": "Optimize Core Web Vitals, service workers, caching, and Lighthouse scores for web apps.",
+    "instructor": "Addy Osmani",
+    "skill_requirements": "Web, Performance, PWA, Frontend"
+  },
+  {
+    "title": "Micro-Frontends & Design Systems Architecture",
+    "description": "Scale large frontends using Webpack Module Federation and standalone UI component libraries.",
+    "instructor": "Zack Jackson",
+    "skill_requirements": "Micro-Frontends, Design Systems, Frontend"
+  },
+
+  {
+    "title": "Python Web Development with Django & FastAPI",
+    "description": "Build high-throughput REST APIs and web apps using Python, FastAPI, and Django ORM.",
+    "instructor": "Dr. Angela Yu",
+    "skill_requirements": "Python, Django, FastAPI, Backend, API"
+  },
+  {
+    "title": "Node.js & Express API Architecture",
+    "description": "Asynchronous backend development with Node.js runtime, Express routing, and JWT auth.",
+    "instructor": "Andrew Mead",
+    "skill_requirements": "Node.js, Express, JavaScript, Backend, API"
+  },
+  {
+    "title": "Microservices Architecture with Go",
+    "description": "High-concurrency backend services using Golang, gRPC, and Protocol Buffers.",
+    "instructor": "Alex Edwards",
+    "skill_requirements": "Go, Golang, Microservices, Backend"
+  },
+  {
+    "title": "Java Spring Boot & Enterprise Engineering",
+    "description": "Enterprise backend systems with Spring Boot 3, Hibernate JPA, and Spring Security.",
+    "instructor": "Chad Darby",
+    "skill_requirements": "Java, Spring Boot, Backend, API"
+  },
+  {
+    "title": "Ruby on Rails 7 Full-Stack Mastery",
+    "description": "Build scalable web applications using Rails 7 Hotwire and Turbo Streams.",
+    "instructor": "DHH",
+    "skill_requirements": "Ruby, Ruby on Rails, Backend"
+  },
+  {
+    "title": "Advanced C# & .NET Core Microservices",
+    "description": "Modern cross-platform C# backend development with ASP.NET Core 8 and EF Core.",
+    "instructor": "Mosh Hamedani",
+    "skill_requirements": "C#, .NET Core, Backend"
+  },
+  {
+    "title": "GraphQL & REST API Architecture",
+    "description": "Design GraphQL schemas, resolvers, rate limiters, and federated API gateways.",
+    "instructor": "Apollo Team",
+    "skill_requirements": "GraphQL, REST, API, Backend"
+  },
+  {
+    "title": "High-Performance Backend Systems in Rust",
+    "description": "Memory-safe systems programming and web servers built with Tokio and Actix-web in Rust.",
+    "instructor": "Jon Gjengset",
+    "skill_requirements": "Rust, Systems, Backend"
+  },
+  {
+    "title": "PHP & Laravel 10 Modern Web Apps",
+    "description": "Rapid backend development with Laravel 10 Eloquent ORM, Blade, and Inertia.js.",
+    "instructor": "Jeffrey Way",
+    "skill_requirements": "PHP, Laravel, Backend"
+  },
+  {
+    "title": "Asynchronous Programming & Queue Systems with Celery",
+    "description": "Background task processing, distributed workers, and delayed job queues using Celery & Redis.",
+    "instructor": "Miguel Grinberg",
+    "skill_requirements": "Python, Celery, Redis, Backend"
+  },
+
+  {
+    "title": "Cybersecurity & Ethical Hacking Complete Mastery",
+    "description": "Learn network scanning, penetration testing, exploit development, and Linux security auditing.",
+    "instructor": "Marcus Vance",
+    "skill_requirements": "Cybersecurity, Ethical Hacking, Networking, Linux, Security, Hacking"
+  },
+  {
+    "title": "Practical Penetration Testing & Bug Bounty",
+    "description": "Hands-on offensive security, web vulnerability exploitation, and bug bounty hunting.",
+    "instructor": "Heath Adams",
+    "skill_requirements": "Penetration Testing, Ethical Hacking, Security, Hacking"
+  },
+  {
+    "title": "Network Security & Intrusion Detection",
+    "description": "Monitor packet traffic with Wireshark, configure Snort IDS, and secure network infrastructure.",
+    "instructor": "Georgia Weidman",
+    "skill_requirements": "Networking, Network Security, Cybersecurity, Linux, Hacking"
+  },
+  {
+    "title": "Web Application Security & OWASP Top 10",
+    "description": "Identify and prevent SQL injection, XSS, CSRF, and authentication bypass vulnerabilities.",
+    "instructor": "Troy Hunt",
+    "skill_requirements": "Web Security, OWASP, Hacking, Cybersecurity"
+  },
+  {
+    "title": "Digital Forensics & Incident Response",
+    "description": "Investigate cyber breaches, analyze memory dumps, and extract digital evidence.",
+    "instructor": "SANS Security",
+    "skill_requirements": "Digital Forensics, Security, Linux, Cybersecurity, Hacking"
+  },
+  {
+    "title": "Wireless Network Hacking & Security",
+    "description": "Audit Wi-Fi protocols, test WPA2/WPA3 encryption, and mitigate rogue access points.",
+    "instructor": "Zaid Sabih",
+    "skill_requirements": "Wireless Security, Ethical Hacking, Networking, Hacking"
+  },
+  {
+    "title": "Reverse Engineering & Malware Analysis",
+    "description": "Disassemble binaries with Ghidra and IDA Pro to analyze malicious payload behavior.",
+    "instructor": "Michael Sikorski",
+    "skill_requirements": "Reverse Engineering, Malware, Assembly, Hacking"
+  },
+  {
+    "title": "Cloud Security & DevSecOps",
+    "description": "Embed automated security scanning, IAM policies, and secret management into CI/CD.",
+    "instructor": "Tanya Janca",
+    "skill_requirements": "Cloud Security, DevSecOps, AWS, Cybersecurity, Hacking"
+  },
+  {
+    "title": "Cryptography & Secure Protocol Engineering",
+    "description": "Understand symmetric/asymmetric encryption, TLS/SSL handshakes, and public key infrastructure.",
+    "instructor": "Prof. Dan Boneh",
+    "skill_requirements": "Cryptography, Security, Cybersecurity"
+  },
+  {
+    "title": "Certified Ethical Hacker (CEH) Exam Bootcamp",
+    "description": "Comprehensive prep course covering all 20 CEH modules for official security certification.",
+    "instructor": "EC-Council Certified",
+    "skill_requirements": "Ethical Hacking, CEH, Security, Cybersecurity, Hacking"
+  },
+
   {
     "title": "AI & Machine Learning Specialization",
-    "instructor": "Sophia Lee",
-    "description": "Comprehensive introduction to artificial intelligence, neural networks, supervised/unsupervised learning using TensorFlow and PyTorch.",
-    "skill_requirements": "Python, Machine Learning, TensorFlow, Deep Learning"
+    "description": "Deep dive into supervised learning, regression, classification, and neural network models.",
+    "instructor": "Andrew Ng",
+    "skill_requirements": "Python, Machine Learning, TensorFlow, Deep Learning, AI"
   },
   {
-    "title": "Mastering SQL & Database Design",
-    "instructor": "Sam Wilson",
-    "description": "Deep dive into relational database design, complex SQL queries, index optimization, and PostgreSQL administration.",
-    "skill_requirements": "SQL, PostgreSQL, Database Design"
+    "title": "Advanced Python for Data Science & Pandas",
+    "description": "Perform complex data cleaning, exploratory analysis, and statistical modeling with Pandas.",
+    "instructor": "Dr. Robert Chen",
+    "skill_requirements": "Python, Pandas, NumPy, Data Analysis, Data Science, AI"
   },
+  {
+    "title": "Deep Learning & Neural Networks with PyTorch",
+    "description": "Build custom convolutional and recurrent neural networks using PyTorch 2.0.",
+    "instructor": "Jeremy Howard",
+    "skill_requirements": "PyTorch, Deep Learning, Neural Networks, AI"
+  },
+  {
+    "title": "Natural Language Processing (NLP) with LLMs",
+    "description": "Process text data using Transformers, BERT, GPT models, and HuggingFace pipelines.",
+    "instructor": "HuggingFace Team",
+    "skill_requirements": "NLP, LLMs, Transformers, Python, AI"
+  },
+  {
+    "title": "Computer Vision & OpenCV Masterclass",
+    "description": "Real-time object detection, face recognition, and image segmentation using OpenCV and YOLO.",
+    "instructor": "Adrian Rosebrock",
+    "skill_requirements": "OpenCV, Computer Vision, Python, AI"
+  },
+  {
+    "title": "Reinforcement Learning & Autonomous Agents",
+    "description": "Q-Learning, Policy Gradients, and Deep Q-Networks for autonomous agent decision making.",
+    "instructor": "David Silver",
+    "skill_requirements": "Reinforcement Learning, Python, AI"
+  },
+  {
+    "title": "Generative AI & Prompt Engineering Masterclass",
+    "description": "Leverage LangChain, RAG architecture, and vector stores to build custom AI assistants.",
+    "instructor": "Harrison Chase",
+    "skill_requirements": "Generative AI, LLMs, OpenAI, AI"
+  },
+  {
+    "title": "Data Engineering & Big Data Pipelines with Spark",
+    "description": "Process terabyte-scale datasets using PySpark, Delta Lake, and distributed computing.",
+    "instructor": "Matei Zaharia",
+    "skill_requirements": "PySpark, Apache Spark, Data Engineering, Python, AI"
+  },
+  {
+    "title": "Statistics & Probability for Data Science",
+    "description": "Master hypothesis testing, Bayesian inference, linear regression, and data distributions.",
+    "instructor": "Khan Academy AI",
+    "skill_requirements": "Statistics, Data Science, Math, Python, AI"
+  },
+  {
+    "title": "MLOps: Deploying Machine Learning Pipelines",
+    "description": "Package, monitor, and deploy ML models using Docker, Kubernetes, and MLflow.",
+    "instructor": "Chip Huyen",
+    "skill_requirements": "MLOps, Docker, MLflow, Python, AI"
+  },
+
   {
     "title": "UI/UX Design & Prototyping Fundamentals",
-    "instructor": "Maya Patel",
-    "description": "Learn user-centered interface design, wireframing, component design systems, and interactive prototyping using Figma.",
-    "skill_requirements": "UI/UX, Figma, Prototyping, Design Systems"
+    "description": "Learn user research, wireframing, component systems, and micro-interactions in Figma.",
+    "instructor": "Elena Rostova",
+    "skill_requirements": "UI/UX, Figma, Prototyping, Design Systems, Design"
   },
+  {
+    "title": "Advanced Figma Design & Interactive Systems",
+    "description": "Master auto-layout 5.0, variables, interactive component states, and design tokens.",
+    "instructor": "Joey Banks",
+    "skill_requirements": "Figma, Design Systems, UI/UX, Design"
+  },
+  {
+    "title": "User Research & Usability Testing Methods",
+    "description": "Conduct user interviews, card sorting, A/B testing, and heuristic evaluations.",
+    "instructor": "Nielsen Norman Group",
+    "skill_requirements": "User Research, Usability, UI/UX, Design"
+  },
+  {
+    "title": "Mobile App UX Design & Micro-Interactions",
+    "description": "Design touch-first mobile interfaces for iOS and Android with delightful gesture animations.",
+    "instructor": "Meng To",
+    "skill_requirements": "Mobile UX, Figma, UI/UX, Design"
+  },
+  {
+    "title": "Design Systems from Scratch to Production",
+    "description": "Create scalable design tokens, component guidelines, and cross-team documentation.",
+    "instructor": "Brad Frost",
+    "skill_requirements": "Design Systems, Figma, CSS, Design"
+  },
+  {
+    "title": "Accessibility & Inclusive Design (a11y)",
+    "description": "Design for screen readers, high contrast, keyboard navigation, and WCAG 2.1 compliance.",
+    "instructor": "Marcy Sutton",
+    "skill_requirements": "Accessibility, HTML, UX, Design"
+  },
+  {
+    "title": "Product Design & Information Architecture",
+    "description": "Structure complex application user flows, sitemaps, and visual hierarchies.",
+    "instructor": "Abby Covert",
+    "skill_requirements": "Information Architecture, Wireframing, UX, Design"
+  },
+  {
+    "title": "Wireframing & Rapid Prototyping with Axure",
+    "description": "Create high-fidelity interactive prototypes with dynamic logic and conditional branching.",
+    "instructor": "Ezra Schwartz",
+    "skill_requirements": "Wireframing, Axure, UI/UX, Design"
+  },
+  {
+    "title": "Visual Communication & Typography Masterclass",
+    "description": "Master typographic scale, grid alignment, color harmony, and visual hierarchy.",
+    "instructor": "Ellen Lupton",
+    "skill_requirements": "Typography, Visual Design, Design"
+  },
+  {
+    "title": "Interaction Design & Motion Graphics for Web",
+    "description": "Bring web interfaces to life using Rive, Lottie, and SVG vector animations.",
+    "instructor": "Jonas Schmedtmann",
+    "skill_requirements": "Motion Design, Rive, Lottie, UI/UX, Design"
+  },
+
+  {
+    "title": "Mastering SQL & Database Design",
+    "description": "Complete guide to relational schema normalization, complex joins, and query indexing.",
+    "instructor": "Michael Stonebraker",
+    "skill_requirements": "SQL, PostgreSQL, Database Design, Database"
+  },
+  {
+    "title": "PostgreSQL Advanced Performance Tuning & Indexing",
+    "description": "Optimize slow queries, B-Tree vs GIN indexes, MVCC concurrency, and EXPLAIN ANALYZE.",
+    "instructor": "Bruce Momjian",
+    "skill_requirements": "PostgreSQL, SQL, Performance, Database"
+  },
+  {
+    "title": "MongoDB & NoSQL Database Architecture",
+    "description": "Design document schemas, aggregation pipelines, and replica sets with MongoDB.",
+    "instructor": "MongoDB University",
+    "skill_requirements": "MongoDB, NoSQL, Database, JSON"
+  },
+  {
+    "title": "Redis Data Structures & Caching Strategies",
+    "description": "Implement pub/sub messaging, rate limiting, and session stores using Redis in-memory DB.",
+    "instructor": "Salvatore Sanfilippo",
+    "skill_requirements": "Redis, Caching, In-Memory, Database"
+  },
+  {
+    "title": "Neo4j Graph Database Fundamentals",
+    "description": "Query highly connected relational graph data using Cypher query language.",
+    "instructor": "Neo4j Team",
+    "skill_requirements": "Graph DB, Neo4j, Cypher, Database"
+  },
+  {
+    "title": "Apache Cassandra & Distributed NoSQL",
+    "description": "Manage masterless, highly available distributed key-value database clusters.",
+    "instructor": "DataStax",
+    "skill_requirements": "Cassandra, Distributed Systems, Database"
+  },
+  {
+    "title": "Database Sharding & High Availability",
+    "description": "Partition big data databases, manage read replicas, and set up automatic failover.",
+    "instructor": "Randy Shoup",
+    "skill_requirements": "Replication, Sharding, SQL, Database"
+  },
+  {
+    "title": "Data Warehousing & Snowflake Analytics",
+    "description": "Build analytical data marts and cloud warehouses using Snowflake and SQL.",
+    "instructor": "Ben Taylor",
+    "skill_requirements": "Snowflake, Data Warehouse, SQL, Database"
+  },
+  {
+    "title": "Elasticsearch & Distributed Full-Text Search",
+    "description": "Configure inverted indexes, search relevance scoring, and log aggregation with ELK stack.",
+    "instructor": "Shay Banon",
+    "skill_requirements": "Elasticsearch, Lucene, Search, Database"
+  },
+  {
+    "title": "SQLAlchemy & Database ORM Mastery",
+    "description": "Deep dive into SQLAlchemy Core and ORM mapping, relationship loaders, and migrations.",
+    "instructor": "Mike Bayer",
+    "skill_requirements": "SQLAlchemy, Python, ORM, Database"
+  },
+
   {
     "title": "Cloud Computing Essentials with AWS",
-    "instructor": "Chris Evans",
-    "description": "Architect and deploy scalable cloud applications on Amazon Web Services (AWS) using EC2, S3, RDS, and Docker containers.",
-    "skill_requirements": "Cloud Computing, AWS, Docker, DevOps"
+    "description": "Deploy secure, auto-scaling cloud infrastructure using EC2, S3, RDS, and CloudFront.",
+    "instructor": "David Miller",
+    "skill_requirements": "AWS, Cloud Computing, EC2, S3, DevOps"
   },
   {
-    "title": "Cybersecurity & Ethical Hacking",
-    "instructor": "Marcus Vance",
-    "description": "Understand network security fundamentals, vulnerability assessment, penetration testing, and secure coding practices.",
-    "skill_requirements": "Cybersecurity, Networking, Ethical Hacking, Linux"
-  },
-  {
-    "title": "Cross-Platform Mobile App Development",
-    "instructor": "Jordan Taylor",
-    "description": "Build high-performance native iOS and Android mobile applications using Flutter and Dart programming.",
-    "skill_requirements": "Mobile Dev, Flutter, Dart, Mobile Architecture"
-  },
-  {
-    "title": "Algorithms & Data Structures in Python",
-    "instructor": "Dr. Alan Turing",
-    "description": "Master fundamental computer science algorithms, dynamic programming, tree traversals, and Big-O computational complexity.",
-    "skill_requirements": "Python, Data Structures, Algorithms"
+    "title": "Docker & Kubernetes Container Orchestration",
+    "description": "Containerize microservices and deploy automated Kubernetes clusters in production.",
+    "instructor": "Nigel Poulton",
+    "skill_requirements": "Docker, Kubernetes, Containers, DevOps"
   },
   {
     "title": "DevOps Continuous Integration & Delivery",
-    "instructor": "Elena Rostova",
-    "description": "Automate modern software deployments using Git, Docker, Kubernetes, GitHub Actions, and CI/CD pipelines.",
-    "skill_requirements": "Git, Docker, Kubernetes, CI/CD"
+    "description": "Automate testing and deployment pipelines using GitHub Actions, Jenkins, and GitOps.",
+    "instructor": "Kelsey Hightower",
+    "skill_requirements": "CI/CD, Git, GitHub Actions, Jenkins, DevOps"
+  },
+  {
+    "title": "Infrastructure as Code with Terraform & AWS",
+    "description": "Provision reproducible multi-cloud infrastructure declaratively with HCL Terraform.",
+    "instructor": "Yevgeniy Brikman",
+    "skill_requirements": "Terraform, AWS, IaC, DevOps"
+  },
+  {
+    "title": "Microsoft Azure Cloud Administrator Certification",
+    "description": "Manage Azure virtual networks, storage accounts, identity AD, and VM scale sets.",
+    "instructor": "Scott Duffy",
+    "skill_requirements": "Azure, Cloud, SysAdmin, DevOps"
+  },
+  {
+    "title": "Google Cloud Platform (GCP) Fundamentals",
+    "description": "Deploy cloud-native solutions using Google Compute Engine, BigQuery, and GKE.",
+    "instructor": "GCP Certified Architect",
+    "skill_requirements": "GCP, Cloud Computing, DevOps"
+  },
+  {
+    "title": "Linux System Administration & Shell Scripting",
+    "description": "Master bash scripting, process monitoring, systemd services, and file permissions.",
+    "instructor": "Jason Cannon",
+    "skill_requirements": "Linux, Bash, SysAdmin, DevOps"
+  },
+  {
+    "title": "Prometheus & Grafana System Monitoring",
+    "description": "Collect metrics, build real-time visual dashboards, and configure alert triggers.",
+    "instructor": "Julius Volz",
+    "skill_requirements": "Monitoring, Prometheus, Grafana, DevOps"
+  },
+  {
+    "title": "Ansible Configuration Management Mastery",
+    "description": "Automate server provisioning and configuration playbooks agentlessly with Ansible.",
+    "instructor": "Jeff Geerling",
+    "skill_requirements": "Ansible, Automation, DevOps"
+  },
+  {
+    "title": "Site Reliability Engineering (SRE) Principles",
+    "description": "Manage Service Level Objectives (SLOs), error budgets, incident postmortems, and chaos engineering.",
+    "instructor": "Google SRE Team",
+    "skill_requirements": "SRE, Distributed Systems, DevOps"
+  },
+
+  {
+    "title": "Cross-Platform Mobile App Development with Flutter",
+    "description": "Build beautiful iOS and Android apps using Dart language and native UI widgets.",
+    "instructor": "Alexandre Santos",
+    "skill_requirements": "Mobile Dev, Flutter, Dart, Mobile Architecture"
+  },
+  {
+    "title": "React Native & Expo Complete Mobile Guide",
+    "description": "Write cross-platform mobile apps in JavaScript and React with native device APIs.",
+    "instructor": "Stephen Grider",
+    "skill_requirements": "React Native, JavaScript, iOS, Android, Mobile Dev"
+  },
+  {
+    "title": "Swift & SwiftUI iOS Development Bootcamp",
+    "description": "Build modern iOS 17 applications using Swift 5 and declarative SwiftUI components.",
+    "instructor": "Paul Hudson",
+    "skill_requirements": "iOS, Swift, SwiftUI, Mobile Dev"
+  },
+  {
+    "title": "Android App Development with Kotlin",
+    "description": "Master Android Jetpack Compose, Coroutines, and ViewModel architecture in Kotlin.",
+    "instructor": "Philipp Lackner",
+    "skill_requirements": "Android, Kotlin, Mobile Dev"
+  },
+  {
+    "title": "Mobile App Security & Reverse Engineering",
+    "description": "Audit iOS/Android binary security, test SSL pinning, and prevent dynamic hooking.",
+    "instructor": "OWASP Mobile Team",
+    "skill_requirements": "Mobile Security, iOS, Android, Hacking, Mobile Dev"
+  },
+  {
+    "title": "Progressive Web Apps & Hybrid Mobile Apps",
+    "description": "Build offline-first mobile apps using Web technologies, Capacitor, and Ionic.",
+    "instructor": "Max Schwarzmüller",
+    "skill_requirements": "PWA, Ionic, Mobile Dev"
+  },
+  {
+    "title": "Mobile Backend as a Service with Firebase",
+    "description": "Integrate Firebase Authentication, Firestore, Cloud Functions, and Push Notifications.",
+    "instructor": "Fireship",
+    "skill_requirements": "Firebase, Mobile Dev, Backend"
+  },
+  {
+    "title": "Mobile UI/UX Animations & Gesture Controls",
+    "description": "Implement complex physics-based gestures and smooth fluid screen transitions.",
+    "instructor": "William Candillon",
+    "skill_requirements": "Mobile UI, Flutter, React Native, Mobile Dev"
+  },
+  {
+    "title": "KMP: Kotlin Multiplatform Mobile Architecture",
+    "description": "Share core business logic between iOS and Android while preserving native UIs.",
+    "instructor": "Touchlab Team",
+    "skill_requirements": "Kotlin Multiplatform, Mobile Dev"
+  },
+  {
+    "title": "Publishing & Monetizing iOS & Android Apps",
+    "description": "App Store Optimization (ASO), in-app purchases, ad integration, and store submissions.",
+    "instructor": "Steve P. Young",
+    "skill_requirements": "App Store, Play Store, Mobile Dev"
   }
 ]

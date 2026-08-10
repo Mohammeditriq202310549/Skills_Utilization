@@ -26,7 +26,9 @@ users = Table(
     Column("phone", String(20), nullable=True),
     Column("age", Integer, nullable=True),
     Column("major", String(100), nullable=True),
+    Column("avatar_url", String(255), nullable=True),
 )
+
 
 # Table 2: courses
 courses = Table(
@@ -67,3 +69,15 @@ course_vectors = Table(
     Column("course_id", String(36), ForeignKey("courses.id", ondelete="CASCADE"), nullable=False, unique=True),
     Column("embedding_vector", Text, nullable=False),
 )
+
+# Table 6: user_courses (enrollments)
+user_courses = Table(
+    "user_courses",
+    metadata,
+    Column("id", String(36), primary_key=True, default=generate_uuid),
+    Column("user_id", String(36), ForeignKey("users.id", ondelete="CASCADE"), nullable=False),
+    Column("course_id", String(36), ForeignKey("courses.id", ondelete="CASCADE"), nullable=False),
+    Column("enrolled_at", String(50), nullable=True),
+    UniqueConstraint("user_id", "course_id", name="uq_user_course"),
+)
+
