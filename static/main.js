@@ -9,7 +9,7 @@ function updateThemeButtonUI(theme) {
   const label = document.getElementById('themeToggleLabel');
   const icon = document.getElementById('themeToggleIcon');
   if (label) label.textContent = theme === 'light' ? 'Light' : 'Dark';
-  if (icon) icon.textContent = theme === 'light' ? '☀️' : '🌙';
+  if (icon) icon.textContent = theme === 'light' ? 'light_mode' : 'dark_mode';
 }
 
 function toggleTheme() {
@@ -57,11 +57,11 @@ function togglePasswordVisibility(inputId, btn) {
   if (!input) return;
   if (input.type === 'password') {
     input.type = 'text';
-    btn.textContent = '🙈';
+    btn.innerHTML = '<span class="material-symbols-outlined">visibility_off</span>';
     btn.setAttribute('aria-label', 'Hide password');
   } else {
     input.type = 'password';
-    btn.textContent = '👁️';
+    btn.innerHTML = '<span class="material-symbols-outlined">visibility</span>';
     btn.setAttribute('aria-label', 'Show password');
   }
 }
@@ -283,14 +283,14 @@ async function toggleFavoriteCourse(courseId, btnElem) {
         userFavoriteCourseIds.add(courseId);
         if (btnElem) {
           btnElem.classList.add('is-favorite');
-          btnElem.textContent = '❤️';
+          btnElem.innerHTML = '<span class="material-symbols-outlined">favorite</span>';
           btnElem.title = 'Remove from favorites';
         }
       } else {
         userFavoriteCourseIds.delete(courseId);
         if (btnElem) {
           btnElem.classList.remove('is-favorite');
-          btnElem.textContent = '🤍';
+          btnElem.innerHTML = '<span class="material-symbols-outlined">favorite</span>';
           btnElem.title = 'Add to favorites';
         }
       }
@@ -327,7 +327,7 @@ async function loadCourses(searchQuery = '', category = 'all') {
       <div>
         <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 0.5rem; margin-bottom: 0.5rem;">
           <h3 style="font-size: 1.2rem; font-weight: 700; color: var(--text-main);">${c.title}</h3>
-          <button type="button" onclick="toggleFavoriteCourse('${c.id}', this)" class="heart-btn ${isFav ? 'is-favorite' : ''}" title="${isFav ? 'Remove from favorites' : 'Add to favorites'}">${isFav ? '❤️' : '🤍'}</button>
+          <button type="button" onclick="toggleFavoriteCourse('${c.id}', this)" class="heart-btn ${isFav ? 'is-favorite' : ''}" title="${isFav ? 'Remove from favorites' : 'Add to favorites'}"><span class="material-symbols-outlined">favorite</span></button>
         </div>
         <p style="color: var(--text-muted); margin: 0.5rem 0;">Instructor: ${c.instructor}</p>
         <p style="font-size: 0.95rem; margin-bottom: 1rem;">${c.description || ''}</p>
@@ -336,7 +336,7 @@ async function loadCourses(searchQuery = '', category = 'all') {
         </div>
       </div>
       <div>
-        <a href="/course-details?id=${c.id}" class="btn-outline" style="font-size:0.85rem; padding:0.4rem 0.8rem; width: 100%; text-align: center; text-decoration: none; display: block;">👁️ View Course Details</a>
+        <a href="/course-details?id=${c.id}" class="btn-outline" style="font-size:0.85rem; padding:0.4rem 0.8rem; width: 100%; text-align: center; text-decoration: none; display: block;"><span class="material-symbols-outlined">visibility</span> View Course Details</a>
       </div>
     </div>
   `;
@@ -391,7 +391,7 @@ async function loadRecommendations() {
             <h3>${c.title}</h3>
             <span class="match-pill">${c.match_score > 0 ? `Matched: ${c.matched_skills.slice(0, 2).join(', ')}` : 'Recommended'}</span>
           </div>
-          <button type="button" onclick="toggleFavoriteCourse('${c.id}', this)" class="heart-btn ${isFav ? 'is-favorite' : ''}" title="${isFav ? 'Remove from favorites' : 'Add to favorites'}">${isFav ? '❤️' : '🤍'}</button>
+          <button type="button" onclick="toggleFavoriteCourse('${c.id}', this)" class="heart-btn ${isFav ? 'is-favorite' : ''}" title="${isFav ? 'Remove from favorites' : 'Add to favorites'}"><span class="material-symbols-outlined">favorite</span></button>
         </div>
         <p style="color: var(--text-muted); margin-bottom: 0.5rem;">Instructor: ${c.instructor}</p>
         <p style="font-size: 0.95rem; margin-bottom: 1rem;">${c.description || ''}</p>
@@ -400,7 +400,7 @@ async function loadRecommendations() {
         </div>
       </div>
       <div>
-        <a href="/course-details?id=${c.id}" class="btn-outline" style="font-size:0.85rem; padding:0.4rem 0.8rem; width: 100%; text-align: center; text-decoration: none; display: block;">👁️ View Course Details</a>
+        <a href="/course-details?id=${c.id}" class="btn-outline" style="font-size:0.85rem; padding:0.4rem 0.8rem; width: 100%; text-align: center; text-decoration: none; display: block;"><span class="material-symbols-outlined">visibility</span> View Course Details</a>
       </div>
     </div>
   `;
@@ -458,8 +458,8 @@ async function loadProfile() {
         </div>
       </div>
       <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
-        <button onclick="toggleEditProfileForm()" class="btn-outline" style="font-size: 0.85rem; padding: 0.5rem 1rem;">✏️ Edit Profile</button>
-        <button onclick="toggleChangePasswordForm()" class="btn-outline" style="font-size: 0.85rem; padding: 0.5rem 1rem; border-color: rgba(168, 85, 247, 0.4); color: #c084fc;">🔑 Change Password</button>
+        <button onclick="toggleEditProfileForm()" class="btn-outline" style="font-size: 0.85rem; padding: 0.5rem 1rem;"><span class="material-symbols-outlined">edit</span> Edit Profile</button>
+        <button onclick="toggleChangePasswordForm()" class="btn-outline" style="font-size: 0.85rem; padding: 0.5rem 1rem; border-color: rgba(168, 85, 247, 0.4); color: #c084fc;"><span class="material-symbols-outlined">key</span> Change Password</button>
       </div>
     </div>
 
@@ -496,20 +496,20 @@ async function loadProfile() {
 
     <!-- Hidden Change Password Form -->
     <div id="changePasswordContainer" style="display: none; background: var(--subcard-bg); padding: 1.5rem; border-radius: var(--radius-md); border: 0.0625rem solid rgba(168, 85, 247, 0.4); margin-bottom: 1.5rem;">
-      <h3 style="font-size: 1.1rem; font-weight: 700; margin-bottom: 1rem; color: var(--text-main);">🔑 Change Account Password</h3>
+      <h3 style="font-size: 1.1rem; font-weight: 700; margin-bottom: 1rem; color: var(--text-main);"><span class="material-symbols-outlined">key</span> Change Account Password</h3>
       <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr)); gap: 1rem; margin-bottom: 1rem;">
         <div>
           <label style="font-size: 0.85rem; color: var(--text-muted); display: block; margin-bottom: 0.4rem;">Current (Old) Password</label>
           <div style="position: relative;">
             <input type="password" id="oldPasswordInput" class="glow-input" placeholder="Enter your current password">
-            <button type="button" onclick="togglePasswordVisibility('oldPasswordInput', this)" style="position: absolute; right: 0.75rem; top: 50%; transform: translateY(-50%); background: none; border: none; cursor: pointer; font-size: 1rem;" aria-label="Show password">👁️</button>
+            <button type="button" onclick="togglePasswordVisibility('oldPasswordInput', this)" style="position: absolute; right: 0.75rem; top: 50%; transform: translateY(-50%); background: none; border: none; cursor: pointer;" aria-label="Show password"><span class="material-symbols-outlined">visibility</span></button>
           </div>
         </div>
         <div>
           <label style="font-size: 0.85rem; color: var(--text-muted); display: block; margin-bottom: 0.4rem;">New Password</label>
           <div style="position: relative;">
             <input type="password" id="newPasswordInput" class="glow-input" placeholder="Min 8 chars, 1 uppercase, 1 number, 1 symbol">
-            <button type="button" onclick="togglePasswordVisibility('newPasswordInput', this)" style="position: absolute; right: 0.75rem; top: 50%; transform: translateY(-50%); background: none; border: none; cursor: pointer; font-size: 1rem;" aria-label="Show password">👁️</button>
+            <button type="button" onclick="togglePasswordVisibility('newPasswordInput', this)" style="position: absolute; right: 0.75rem; top: 50%; transform: translateY(-50%); background: none; border: none; cursor: pointer;" aria-label="Show password"><span class="material-symbols-outlined">visibility</span></button>
           </div>
         </div>
       </div>
@@ -538,7 +538,7 @@ async function loadProfile() {
     <div style="margin-bottom: 2rem;">
       <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem;">
         <h3 style="font-size: 1.1rem; color: var(--text-main);">Selected Skills & Interests</h3>
-        <button onclick="toggleAddSkillForm()" class="btn-indigo" style="font-size: 0.85rem; padding: 0.4rem 0.9rem;">➕ Add New Skill</button>
+        <button onclick="toggleAddSkillForm()" class="btn-indigo" style="font-size: 0.85rem; padding: 0.4rem 0.9rem;"><span class="material-symbols-outlined">add</span> Add New Skill</button>
       </div>
 
       <!-- Hidden inline Add Skill Form -->
@@ -559,8 +559,8 @@ async function loadProfile() {
         ${(u.skills || []).length > 0
           ? u.skills.map(s => `
               <span class="badge-tag" style="padding: 0.4rem 0.8rem; font-size: 0.85rem; display: inline-flex; align-items: center; gap: 0.5rem; margin-bottom: 0.4rem;">
-                ⚡ ${s.skill_name} (${s.proficiency || 'Beginner'})
-                <button onclick="deleteSkill('${s.skill_id}')" style="background: none; border: none; color: var(--text-muted); cursor: pointer; font-size: 0.9rem; padding: 0; line-height: 1; transition: color 0.2s;" onmouseover="this.style.color='#f87171'" onmouseout="this.style.color='var(--text-muted)'" title="Remove Skill">✕</button>
+                <span class="material-symbols-outlined">bolt</span> ${s.skill_name} (${s.proficiency || 'Beginner'})
+                <button onclick="deleteSkill('${s.skill_id}')" style="background: none; border: none; color: var(--text-muted); cursor: pointer; padding: 0; display: inline-flex; align-items: center; transition: color 0.2s;" onmouseover="this.style.color='#f87171'" onmouseout="this.style.color='var(--text-muted)'" title="Remove Skill"><span class="material-symbols-outlined" style="font-size: 1rem;">close</span></button>
               </span>
             `).join(' ')
           : '<p style="color: var(--text-muted); font-size: 0.9rem;">No skills selected yet.</p>'}
@@ -570,7 +570,7 @@ async function loadProfile() {
     <!-- Favorite Courses Section -->
     <div style="border-top: 0.0625rem solid var(--border-glass); padding-top: 1.5rem; margin-top: 1.5rem;">
       <h3 style="font-size: 1.2rem; font-weight: 700; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem; color: var(--text-main);">
-        ❤️ Favorite Courses <span style="font-size: 0.8rem; color: #f43f5e; background: rgba(244, 63, 94, 0.15); padding: 0.2rem 0.5rem; border-radius: 1rem;">${favList.length}</span>
+        <span class="material-symbols-outlined" style="color: #f43f5e; font-variation-settings: 'FILL' 1;">favorite</span> Favorite Courses <span style="font-size: 0.8rem; color: #f43f5e; background: rgba(244, 63, 94, 0.15); padding: 0.2rem 0.5rem; border-radius: 1rem;">${favList.length}</span>
       </h3>
 
       ${favList.length > 0
@@ -580,7 +580,7 @@ async function loadProfile() {
                 <div>
                   <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 0.3rem;">
                     <h4 style="font-size: 1.05rem; color: var(--text-main);">${c.title}</h4>
-                    <button type="button" onclick="toggleFavoriteCourse('${c.id}', this)" class="heart-btn is-favorite" style="width: 1.8rem; height: 1.8rem; font-size: 0.9rem;" title="Remove from favorites">❤️</button>
+                    <button type="button" onclick="toggleFavoriteCourse('${c.id}', this)" class="heart-btn is-favorite" style="width: 1.8rem; height: 1.8rem;" title="Remove from favorites"><span class="material-symbols-outlined">favorite</span></button>
                   </div>
                   <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0.5rem;">Instructor: ${c.instructor}</p>
                   <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0.75rem; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;">${c.description || ''}</p>
@@ -601,7 +601,7 @@ async function loadProfile() {
     <!-- Enrolled Courses Section -->
     <div style="border-top: 0.0625rem solid var(--border-glass); padding-top: 1.5rem; margin-top: 1.5rem;">
       <h3 style="font-size: 1.2rem; font-weight: 700; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem; color: var(--text-main);">
-        🎓 Enrolled Courses <span style="font-size: 0.8rem; color: var(--primary-indigo); background: rgba(99, 102, 241, 0.15); padding: 0.2rem 0.5rem; border-radius: 1rem;">${enrolledList.length}</span>
+        <span class="material-symbols-outlined" style="color: var(--primary-indigo);">school</span> Enrolled Courses <span style="font-size: 0.8rem; color: var(--primary-indigo); background: rgba(99, 102, 241, 0.15); padding: 0.2rem 0.5rem; border-radius: 1rem;">${enrolledList.length}</span>
       </h3>
 
       ${enrolledList.length > 0
@@ -829,7 +829,7 @@ async function loadCourseDetails() {
         <h1 style="font-size: 2rem; font-weight: 800; margin-bottom: 0.5rem; color: var(--text-main);">${c.title}</h1>
         <p style="color: var(--primary-indigo); font-weight: 600; font-size: 1.05rem;">Instructor: ${c.instructor}</p>
       </div>
-      <button type="button" onclick="toggleFavoriteCourse('${c.id}', this)" class="heart-btn ${isFav ? 'is-favorite' : ''}" style="margin-top: 1rem;" title="${isFav ? 'Remove from favorites' : 'Add to favorites'}">${isFav ? '❤️' : '🤍'}</button>
+      <button type="button" onclick="toggleFavoriteCourse('${c.id}', this)" class="heart-btn ${isFav ? 'is-favorite' : ''}" style="margin-top: 1rem;" title="${isFav ? 'Remove from favorites' : 'Add to favorites'}"><span class="material-symbols-outlined">favorite</span></button>
     </div>
 
     <div style="background: var(--subcard-bg); padding: 1.5rem; border-radius: var(--radius-md); border: 0.0625rem solid var(--border-glass); margin-bottom: 1.5rem;">
@@ -840,17 +840,17 @@ async function loadCourseDetails() {
     <div style="margin-bottom: 2rem;">
       <h3 style="font-size: 1.1rem; margin-bottom: 0.75rem;">Skills & Technologies Covered</h3>
       <div>
-        ${(c.skill_requirements || '').split(',').map(s => `<span class="badge-tag" style="padding: 0.4rem 0.8rem; font-size: 0.85rem;">⚡ ${s.trim()}</span>`).join(' ')}
+        ${(c.skill_requirements || '').split(',').map(s => `<span class="badge-tag" style="padding: 0.4rem 0.8rem; font-size: 0.85rem;"><span class="material-symbols-outlined" style="font-size: 1rem; vertical-align: middle;">bolt</span> ${s.trim()}</span>`).join(' ')}
       </div>
     </div>
 
     <div id="enrollActionContainer" style="border-top: 0.0625rem solid var(--border-glass); padding-top: 1.5rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
       ${isEnrolled
         ? `<div style="display: flex; align-items: center; gap: 1rem;">
-            <span style="color: #4ade80; font-weight: 600; font-size: 1.05rem;">✅ You are enrolled in this course</span>
+            <span style="color: #4ade80; font-weight: 600; font-size: 1.05rem;"><span class="material-symbols-outlined" style="color: #4ade80; vertical-align: middle;">check_circle</span> You are enrolled in this course</span>
             <button onclick="unenrollFromCourse('${c.id}', true)" class="btn-outline" style="border-color: rgba(239, 68, 68, 0.4); color: #f87171;">Unenroll</button>
            </div>`
-        : `<button onclick="enrollInCourse('${c.id}')" class="btn-indigo" style="padding: 0.75rem 2rem; font-size: 1rem;">🎓 Enroll in Course</button>`
+        : `<button onclick="enrollInCourse('${c.id}')" class="btn-indigo" style="padding: 0.75rem 2rem; font-size: 1rem;"><span class="material-symbols-outlined" style="vertical-align: middle;">school</span> Enroll in Course</button>`
       }
       <a href="/courses" class="btn-outline">Browse More Courses</a>
     </div>

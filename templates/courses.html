@@ -5,6 +5,7 @@
   <title>Courses - SkillMatch</title>
   <link rel="stylesheet" href="/static/style.css">
   <link rel="stylesheet" href="/static/courses.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 </head>
 <body>
   <nav class="navbar">
@@ -16,23 +17,23 @@
         <li><a href="/profile">Profile</a></li>
       </ul>
       <button onclick="toggleTheme()" class="btn-theme-toggle" title="Toggle Dark / Light Mode">
-        <span id="themeToggleIcon">🌙</span> <span id="themeToggleLabel">Dark</span>
+        <span id="themeToggleIcon" class="material-symbols-outlined">dark_mode</span> <span id="themeToggleLabel">Dark</span>
       </button>
     </div>
   </nav>
   <main class="main-container">
-    <input type="text" id="searchInput" class="search-box" placeholder="🔍 Search courses, instructors, or skill keywords...">
+    <input type="text" id="searchInput" class="search-box" placeholder="Search courses, instructors, or skill keywords...">
 
     <div class="category-filters category-filters-container" id="categoryFilters">
-      <button type="button" class="filter-btn active" data-category="all">All Courses</button>
-      <button type="button" class="filter-btn" data-category="frontend">⚡ Frontend</button>
-      <button type="button" class="filter-btn" data-category="backend">⚙️ Backend</button>
-      <button type="button" class="filter-btn" data-category="hacking">🛡️ Hacking / Cybersecurity</button>
-      <button type="button" class="filter-btn" data-category="ai">🤖 AI & Machine Learning</button>
-      <button type="button" class="filter-btn" data-category="design">🎨 UI/UX Design</button>
-      <button type="button" class="filter-btn" data-category="database">🗄️ Database</button>
-      <button type="button" class="filter-btn" data-category="devops">☁️ Cloud & DevOps</button>
-      <button type="button" class="filter-btn" data-category="mobile">📱 Mobile Dev</button>
+      <button type="button" class="filter-btn active" data-category="all"><span class="material-symbols-outlined">apps</span> All Courses</button>
+      <button type="button" class="filter-btn" data-category="frontend"><span class="material-symbols-outlined">code</span> Frontend</button>
+      <button type="button" class="filter-btn" data-category="backend"><span class="material-symbols-outlined">terminal</span> Backend</button>
+      <button type="button" class="filter-btn" data-category="hacking"><span class="material-symbols-outlined">security</span> Hacking / Cybersecurity</button>
+      <button type="button" class="filter-btn" data-category="ai"><span class="material-symbols-outlined">smart_toy</span> AI & Machine Learning</button>
+      <button type="button" class="filter-btn" data-category="design"><span class="material-symbols-outlined">palette</span> UI/UX Design</button>
+      <button type="button" class="filter-btn" data-category="database"><span class="material-symbols-outlined">database</span> Database</button>
+      <button type="button" class="filter-btn" data-category="devops"><span class="material-symbols-outlined">cloud</span> Cloud & DevOps</button>
+      <button type="button" class="filter-btn" data-category="mobile"><span class="material-symbols-outlined">smartphone</span> Mobile Dev</button>
     </div>
 
     <div class="grid-layout" id="courseGrid"></div>
