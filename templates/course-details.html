@@ -8,19 +8,19 @@
 </head>
 <body>
   <nav class="navbar">
-    <a href="/" class="logo">Skill<span>Match</span></a>
-    <div style="display: flex; align-items: center; gap: 1.5rem;">
+    <a href="/courses" class="logo">Skill<span>Match</span></a>
+    <div class="nav-right">
       <ul class="nav-links">
         <li><a href="/courses">Courses</a></li>
         <li><a href="/recommendations">Recommendations</a></li>
         <li><a href="/profile">Profile</a></li>
       </ul>
-      <button onclick="toggleTheme()" class="btn-outline" style="padding: 0.4rem 0.85rem; font-size: 0.85rem; display: flex; align-items: center; gap: 0.4rem; border-radius: 2rem;" title="Toggle Dark / Light Mode">
+      <button onclick="toggleTheme()" class="btn-theme-toggle" title="Toggle Dark / Light Mode">
         <span id="themeToggleIcon">🌙</span> <span id="themeToggleLabel">Dark</span>
       </button>
     </div>
   </nav>
-  <main class="main-container" style="max-width: 50rem; margin: 3rem auto;">
+  <main class="main-container details-container">
     <div class="glass-card" id="detailsCard"></div>
   </main>
   <script src="/static/main.js"></script>

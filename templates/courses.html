@@ -8,14 +8,14 @@
 </head>
 <body>
   <nav class="navbar">
-    <a href="/" class="logo">Skill<span>Match</span></a>
-    <div style="display: flex; align-items: center; gap: 1.5rem;">
+    <a href="/courses" class="logo">Skill<span>Match</span></a>
+    <div class="nav-right">
       <ul class="nav-links">
         <li><a href="/courses" class="active">Courses</a></li>
         <li><a href="/recommendations">Recommendations</a></li>
         <li><a href="/profile">Profile</a></li>
       </ul>
-      <button onclick="toggleTheme()" class="btn-outline" style="padding: 0.4rem 0.85rem; font-size: 0.85rem; display: flex; align-items: center; gap: 0.4rem; border-radius: 2rem;" title="Toggle Dark / Light Mode">
+      <button onclick="toggleTheme()" class="btn-theme-toggle" title="Toggle Dark / Light Mode">
         <span id="themeToggleIcon">🌙</span> <span id="themeToggleLabel">Dark</span>
       </button>
     </div>
@@ -23,7 +23,7 @@
   <main class="main-container">
     <input type="text" id="searchInput" class="search-box" placeholder="🔍 Search courses, instructors, or skill keywords...">
 
-    <div class="category-filters" id="categoryFilters" style="display: flex; flex-wrap: wrap; gap: 0.6rem; margin-bottom: 2rem;">
+    <div class="category-filters category-filters-container" id="categoryFilters">
       <button type="button" class="filter-btn active" data-category="all">All Courses</button>
       <button type="button" class="filter-btn" data-category="frontend">⚡ Frontend</button>
       <button type="button" class="filter-btn" data-category="backend">⚙️ Backend</button>

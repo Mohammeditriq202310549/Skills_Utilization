@@ -9,6 +9,8 @@ from app.auth import (
     token_required,
     validate_email,
     validate_password,
+    validate_phone,
+    validate_age,
 )
 
 auth_bp = Blueprint("auth", __name__)
@@ -33,6 +35,16 @@ def register():
     is_valid_pw, pw_msg = validate_password(password)
     if not is_valid_pw:
         return jsonify({"error": pw_msg}), 400
+
+    if phone:
+        is_valid_phone, phone_msg = validate_phone(phone)
+        if not is_valid_phone:
+            return jsonify({"error": phone_msg}), 400
+
+    if age is not None and str(age).strip() != "":
+        is_valid_age, age_msg = validate_age(age)
+        if not is_valid_age:
+            return jsonify({"error": age_msg}), 400
 
 
     hashed_pw = hash_password(password)
@@ -122,7 +134,7 @@ def login():
     }), 200
 
 
-from app.models import users, skills, user_skills, user_courses, courses
+from app.models import users, skills, user_skills, user_courses, courses, user_favorites
 
 from sqlalchemy import update
 
@@ -175,6 +187,33 @@ def get_current_user_profile(current_user_id):
             for r in enrolled_rows
         ]
 
+        # Fetch favorited courses
+        stmt_favs = (
+            select(
+                courses.c.id,
+                courses.c.title,
+                courses.c.description,
+                courses.c.instructor,
+                courses.c.skill_requirements,
+                user_favorites.c.created_at
+            )
+            .select_from(user_favorites.join(courses, user_favorites.c.course_id == courses.c.id))
+            .where(user_favorites.c.user_id == current_user_id)
+        )
+        fav_rows = conn.execute(stmt_favs).fetchall()
+        favorite_courses_list = [
+            {
+                "id": r.id,
+                "title": r.title,
+                "description": r.description,
+                "instructor": r.instructor,
+                "skill_requirements": r.skill_requirements,
+                "created_at": r.created_at
+            }
+            for r in fav_rows
+        ]
+        favorite_course_ids = [r.id for r in fav_rows]
+
     return jsonify({
         "id": user.id,
         "username": user.username,
@@ -184,7 +223,9 @@ def get_current_user_profile(current_user_id):
         "major": user.major,
         "avatar_url": getattr(user, "avatar_url", None),
         "skills": user_skills_list,
-        "enrolled_courses": enrolled_courses_list
+        "enrolled_courses": enrolled_courses_list,
+        "favorite_courses": favorite_courses_list,
+        "favorite_course_ids": favorite_course_ids
     }), 200
 
 
@@ -220,10 +261,22 @@ def update_user_profile(current_user_id):
                 return jsonify({"error": "An account with this email already exists"}), 400
             update_values["email"] = new_email
 
-        if phone is not None:
-            update_values["phone"] = phone.strip() if isinstance(phone, str) else phone
-        if age is not None:
-            update_values["age"] = int(age) if str(age).isdigit() else None
+        if phone is not None and str(phone).strip() != "":
+            is_valid_phone, phone_msg = validate_phone(phone)
+            if not is_valid_phone:
+                return jsonify({"error": phone_msg}), 400
+            update_values["phone"] = str(phone).strip()
+        elif phone is not None:
+            update_values["phone"] = None
+
+        if age is not None and str(age).strip() != "":
+            is_valid_age, age_msg = validate_age(age)
+            if not is_valid_age:
+                return jsonify({"error": age_msg}), 400
+            update_values["age"] = int(age)
+        elif age is not None:
+            update_values["age"] = None
+
         if major is not None:
             update_values["major"] = major.strip() if isinstance(major, str) else major
         if avatar_url is not None:

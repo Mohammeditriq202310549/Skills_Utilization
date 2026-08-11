@@ -1,9 +1,14 @@
 from flask import Flask, jsonify
 from config import Config
+from app.db import engine
+from app.models import metadata
 
 def create_app():
     app = Flask(__name__, template_folder="../templates", static_folder="../static")
     app.config.from_object(Config)
+
+    # Ensure tables are created
+    metadata.create_all(bind=engine)
 
     from app.routes_auth import auth_bp
     from app.routes_courses import courses_bp

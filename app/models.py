@@ -81,3 +81,15 @@ user_courses = Table(
     UniqueConstraint("user_id", "course_id", name="uq_user_course"),
 )
 
+# Table 7: user_favorites
+user_favorites = Table(
+    "user_favorites",
+    metadata,
+    Column("id", String(36), primary_key=True, default=generate_uuid),
+    Column("user_id", String(36), ForeignKey("users.id", ondelete="CASCADE"), nullable=False),
+    Column("course_id", String(36), ForeignKey("courses.id", ondelete="CASCADE"), nullable=False),
+    Column("created_at", String(50), nullable=True),
+    UniqueConstraint("user_id", "course_id", name="uq_user_favorite"),
+)
+
+

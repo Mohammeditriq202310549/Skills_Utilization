@@ -66,8 +66,66 @@ function togglePasswordVisibility(inputId, btn) {
   }
 }
 
-// 1. Handle Skill Chip Selection on Registration
+function enforceNumericInput(inputId) {
+  const inputElem = typeof inputId === 'string' ? document.getElementById(inputId) : inputId;
+  if (!inputElem) return;
+
+  inputElem.addEventListener('keydown', (e) => {
+    if (['Backspace', 'Delete', 'Tab', 'Escape', 'Enter'].includes(e.key) ||
+        e.ctrlKey || e.metaKey ||
+        ['Home', 'End', 'ArrowLeft', 'ArrowRight'].includes(e.key)) {
+      return;
+    }
+    if (!/^[0-9]$/.test(e.key)) {
+      e.preventDefault();
+    }
+  });
+
+  inputElem.addEventListener('input', () => {
+    inputElem.value = inputElem.value.replace(/\D/g, '');
+  });
+}
+
+function attachPhoneValidation(inputId, containerId) {
+  const phoneInput = document.getElementById(inputId);
+  if (!phoneInput) return;
+
+  const validate = () => {
+    const val = phoneInput.value.trim();
+    if (!val) {
+      hideInlineError(containerId);
+      return true;
+    }
+    const phoneRegex = /^(077|078|079)\d{7}$/;
+    if (!phoneRegex.test(val)) {
+      showInlineError(containerId, 'Phone number must start with 077, 078, or 079 and be exactly 10 digits long.');
+      return false;
+    } else {
+      hideInlineError(containerId);
+      return true;
+    }
+  };
+
+  phoneInput.addEventListener('blur', validate);
+  phoneInput.addEventListener('input', () => {
+    const container = document.getElementById(containerId);
+    const errDiv = container?.querySelector('.inline-msg');
+    if ((errDiv && errDiv.style.display !== 'none') || phoneInput.value.length >= 10) {
+      validate();
+    }
+  });
+}
+
+// 1. Handle Skill Chip Selection on Registration & Input Restrictions Setup
 document.addEventListener('DOMContentLoaded', () => {
+  attachPhoneValidation('phone', 'registerForm');
+  attachPhoneValidation('editPhone', 'editProfileContainer');
+
+  enforceNumericInput('phone');
+  enforceNumericInput('age');
+  enforceNumericInput('editPhone');
+  enforceNumericInput('editAge');
+
   const skillChips = document.querySelectorAll('.skill-chip');
   if (skillChips.length > 0) {
     skillChips.forEach(chip => {
@@ -146,8 +204,25 @@ if (registerForm) {
       return;
     }
 
-    const phone = document.getElementById('phone')?.value || null;
-    const age = document.getElementById('age')?.value ? parseInt(document.getElementById('age').value) : null;
+    const phone = document.getElementById('phone')?.value?.trim() || null;
+    const ageRaw = document.getElementById('age')?.value;
+    const age = (ageRaw !== undefined && ageRaw !== '' && ageRaw !== null) ? parseInt(ageRaw) : null;
+
+    if (phone) {
+      const phoneRegex = /^(077|078|079)\d{7}$/;
+      if (!phoneRegex.test(phone)) {
+        showInlineError('registerForm', 'Phone number must start with 077, 078, or 079 and be exactly 10 digits long.');
+        return;
+      }
+    }
+
+    if (ageRaw !== undefined && ageRaw !== '' && ageRaw !== null) {
+      if (isNaN(age) || age < 1 || age > 120) {
+        showInlineError('registerForm', 'Invalid age. Please enter a valid number.');
+        return;
+      }
+    }
+
     const major = document.getElementById('major')?.value || null;
     const skillsRaw = document.getElementById('skillsInput')?.value || '';
     const skillsList = skillsRaw.split(',').map(s => s.trim()).filter(s => s.length > 0);
@@ -169,10 +244,72 @@ if (registerForm) {
 
 // 4. Load Courses with Search & Category Filters
 let currentCategory = 'all';
+let userFavoriteCourseIds = new Set();
+let isFavoritesFetched = false;
+
+async function fetchUserFavoritesSet() {
+  const token = localStorage.getItem('token');
+  if (!token) return;
+  try {
+    const res = await fetch('/api/users/me', { headers: getAuthHeader() });
+    if (res.ok) {
+      const data = await res.json();
+      if (data.favorite_course_ids) {
+        userFavoriteCourseIds = new Set(data.favorite_course_ids);
+        isFavoritesFetched = true;
+      }
+    }
+  } catch (err) {
+    console.error('Error fetching favorites:', err);
+  }
+}
+
+async function toggleFavoriteCourse(courseId, btnElem) {
+  const token = localStorage.getItem('token');
+  if (!token) {
+    window.location.href = '/login';
+    return;
+  }
+
+  try {
+    const res = await fetch(`/api/courses/${courseId}/favorite`, {
+      method: 'POST',
+      headers: getAuthHeader()
+    });
+
+    if (res.ok) {
+      const data = await res.json();
+      if (data.favorited) {
+        userFavoriteCourseIds.add(courseId);
+        if (btnElem) {
+          btnElem.classList.add('is-favorite');
+          btnElem.textContent = '❤️';
+          btnElem.title = 'Remove from favorites';
+        }
+      } else {
+        userFavoriteCourseIds.delete(courseId);
+        if (btnElem) {
+          btnElem.classList.remove('is-favorite');
+          btnElem.textContent = '🤍';
+          btnElem.title = 'Add to favorites';
+        }
+      }
+
+      const profileCard = document.getElementById('profileCard');
+      if (profileCard) {
+        loadProfile();
+      }
+    }
+  } catch (err) {
+    console.error('Error toggling favorite:', err);
+  }
+}
 
 async function loadCourses(searchQuery = '', category = 'all') {
   const grid = document.getElementById('courseGrid');
   if (!grid) return;
+
+  if (!isFavoritesFetched) await fetchUserFavoritesSet();
 
   const url = `/api/courses?search=${encodeURIComponent(searchQuery)}&category=${encodeURIComponent(category)}`;
   const res = await fetch(url);
@@ -183,10 +320,15 @@ async function loadCourses(searchQuery = '', category = 'all') {
     return;
   }
 
-  grid.innerHTML = courses.map(c => `
+  grid.innerHTML = courses.map(c => {
+    const isFav = userFavoriteCourseIds.has(c.id);
+    return `
     <div class="glass-card" style="display: flex; flex-direction: column; justify-content: space-between;">
       <div>
-        <h3>${c.title}</h3>
+        <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 0.5rem; margin-bottom: 0.5rem;">
+          <h3 style="font-size: 1.2rem; font-weight: 700; color: var(--text-main);">${c.title}</h3>
+          <button type="button" onclick="toggleFavoriteCourse('${c.id}', this)" class="heart-btn ${isFav ? 'is-favorite' : ''}" title="${isFav ? 'Remove from favorites' : 'Add to favorites'}">${isFav ? '❤️' : '🤍'}</button>
+        </div>
         <p style="color: var(--text-muted); margin: 0.5rem 0;">Instructor: ${c.instructor}</p>
         <p style="font-size: 0.95rem; margin-bottom: 1rem;">${c.description || ''}</p>
         <div style="margin-bottom: 1rem;">
@@ -197,7 +339,8 @@ async function loadCourses(searchQuery = '', category = 'all') {
         <a href="/course-details?id=${c.id}" class="btn-outline" style="font-size:0.85rem; padding:0.4rem 0.8rem; width: 100%; text-align: center; text-decoration: none; display: block;">👁️ View Course Details</a>
       </div>
     </div>
-  `).join('');
+  `;
+  }).join('');
 }
 
 const searchInput = document.getElementById('searchInput');
@@ -224,6 +367,8 @@ async function loadRecommendations() {
   const grid = document.getElementById('recommendationsGrid');
   if (!grid) return;
 
+  if (!isFavoritesFetched) await fetchUserFavoritesSet();
+
   const res = await fetch('/api/recommendations', { headers: getAuthHeader() });
   if (res.status === 401) {
     window.location.href = '/login';
@@ -236,12 +381,17 @@ async function loadRecommendations() {
     return;
   }
 
-  grid.innerHTML = recs.map(c => `
+  grid.innerHTML = recs.map(c => {
+    const isFav = userFavoriteCourseIds.has(c.id);
+    return `
     <div class="glass-card" style="display: flex; flex-direction: column; justify-content: space-between;">
       <div>
-        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom: 0.5rem;">
-          <h3>${c.title}</h3>
-          <span class="match-pill">${c.match_score > 0 ? `Matched: ${c.matched_skills.slice(0, 2).join(', ')}` : 'Recommended'}</span>
+        <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom: 0.5rem;">
+          <div>
+            <h3>${c.title}</h3>
+            <span class="match-pill">${c.match_score > 0 ? `Matched: ${c.matched_skills.slice(0, 2).join(', ')}` : 'Recommended'}</span>
+          </div>
+          <button type="button" onclick="toggleFavoriteCourse('${c.id}', this)" class="heart-btn ${isFav ? 'is-favorite' : ''}" title="${isFav ? 'Remove from favorites' : 'Add to favorites'}">${isFav ? '❤️' : '🤍'}</button>
         </div>
         <p style="color: var(--text-muted); margin-bottom: 0.5rem;">Instructor: ${c.instructor}</p>
         <p style="font-size: 0.95rem; margin-bottom: 1rem;">${c.description || ''}</p>
@@ -253,7 +403,8 @@ async function loadRecommendations() {
         <a href="/course-details?id=${c.id}" class="btn-outline" style="font-size:0.85rem; padding:0.4rem 0.8rem; width: 100%; text-align: center; text-decoration: none; display: block;">👁️ View Course Details</a>
       </div>
     </div>
-  `).join('');
+  `;
+  }).join('');
 }
 
 loadRecommendations();
@@ -284,6 +435,12 @@ async function loadProfile() {
 
   const u = await res.json();
   const enrolledList = u.enrolled_courses || [];
+  const favList = u.favorite_courses || [];
+
+  if (u.favorite_course_ids) {
+    userFavoriteCourseIds = new Set(u.favorite_course_ids);
+    isFavoritesFetched = true;
+  }
 
   const avatarDisplay = u.avatar_url
     ? `<img src="${u.avatar_url}" style="width: 4.5rem; height: 4.5rem; border-radius: 50%; object-fit: cover; border: 0.125rem solid var(--primary-indigo);">`
@@ -323,8 +480,12 @@ async function loadProfile() {
           <input type="text" id="editMajor" class="glow-input" value="${u.major || ''}" placeholder="e.g. Computer Science">
         </div>
         <div>
+          <label style="font-size: 0.85rem; color: var(--text-muted); display: block; margin-bottom: 0.4rem;">Age</label>
+          <input type="text" id="editAge" class="glow-input" value="${u.age || ''}" placeholder="21" maxlength="3" inputmode="numeric">
+        </div>
+        <div>
           <label style="font-size: 0.85rem; color: var(--text-muted); display: block; margin-bottom: 0.4rem;">Phone Number</label>
-          <input type="text" id="editPhone" class="glow-input" value="${u.phone || ''}" placeholder="+1 555-0199">
+          <input type="text" id="editPhone" class="glow-input" value="${u.phone || ''}" placeholder="0791234567" maxlength="10" inputmode="numeric">
         </div>
       </div>
       <div style="display: flex; justify-content: flex-end; gap: 0.75rem;">
@@ -406,6 +567,37 @@ async function loadProfile() {
       </div>
     </div>
 
+    <!-- Favorite Courses Section -->
+    <div style="border-top: 0.0625rem solid var(--border-glass); padding-top: 1.5rem; margin-top: 1.5rem;">
+      <h3 style="font-size: 1.2rem; font-weight: 700; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem; color: var(--text-main);">
+        ❤️ Favorite Courses <span style="font-size: 0.8rem; color: #f43f5e; background: rgba(244, 63, 94, 0.15); padding: 0.2rem 0.5rem; border-radius: 1rem;">${favList.length}</span>
+      </h3>
+
+      ${favList.length > 0
+        ? `<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr)); gap: 1rem;">
+            ${favList.map(c => `
+              <div style="background: var(--subcard-bg); border: 0.0625rem solid var(--border-glass); padding: 1.25rem; border-radius: var(--radius-md); display: flex; flex-direction: column; justify-content: space-between;">
+                <div>
+                  <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 0.3rem;">
+                    <h4 style="font-size: 1.05rem; color: var(--text-main);">${c.title}</h4>
+                    <button type="button" onclick="toggleFavoriteCourse('${c.id}', this)" class="heart-btn is-favorite" style="width: 1.8rem; height: 1.8rem; font-size: 0.9rem;" title="Remove from favorites">❤️</button>
+                  </div>
+                  <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0.5rem;">Instructor: ${c.instructor}</p>
+                  <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0.75rem; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;">${c.description || ''}</p>
+                </div>
+                <div style="display: flex; gap: 0.5rem;">
+                  <a href="/course-details?id=${c.id}" class="btn-outline" style="font-size: 0.75rem; padding: 0.35rem 0.6rem; flex: 1; text-align: center; text-decoration: none;">View Details</a>
+                </div>
+              </div>
+            `).join('')}
+          </div>`
+        : `<div style="background: var(--subcard-bg); border: 0.0625rem dashed var(--border-glass); padding: 2rem; border-radius: var(--radius-md); text-align: center;">
+            <p style="color: var(--text-muted); margin-bottom: 1rem;">You haven't favorited any courses yet.</p>
+            <a href="/courses" class="btn-indigo" style="font-size: 0.85rem; padding: 0.5rem 1rem; text-decoration: none; display: inline-block;">Browse Courses</a>
+          </div>`
+      }
+    </div>
+
     <!-- Enrolled Courses Section -->
     <div style="border-top: 0.0625rem solid var(--border-glass); padding-top: 1.5rem; margin-top: 1.5rem;">
       <h3 style="font-size: 1.2rem; font-weight: 700; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem; color: var(--text-main);">
@@ -445,7 +637,15 @@ async function loadProfile() {
 function toggleEditProfileForm() {
   const container = document.getElementById('editProfileContainer');
   if (container) {
-    container.style.display = container.style.display === 'none' ? 'block' : 'none';
+    const isOpening = container.style.display === 'none';
+    container.style.display = isOpening ? 'block' : 'none';
+    if (isOpening) {
+      attachPhoneValidation('editPhone', 'editProfileContainer');
+      enforceNumericInput('editPhone');
+      enforceNumericInput('editAge');
+    } else {
+      hideInlineError('editProfileContainer');
+    }
   }
 }
 
@@ -461,7 +661,24 @@ async function submitProfileEdit() {
   const email = document.getElementById('editEmail')?.value;
   const avatar_url = document.getElementById('editAvatarUrl')?.value;
   const major = document.getElementById('editMajor')?.value;
-  const phone = document.getElementById('editPhone')?.value;
+  const phone = document.getElementById('editPhone')?.value?.trim();
+  const ageRaw = document.getElementById('editAge')?.value;
+  const age = (ageRaw !== undefined && ageRaw !== '' && ageRaw !== null) ? parseInt(ageRaw) : null;
+
+  if (phone && phone.length > 0) {
+    const phoneRegex = /^(077|078|079)\d{7}$/;
+    if (!phoneRegex.test(phone)) {
+      showInlineError('editProfileContainer', 'Phone number must start with 077, 078, or 079 and be exactly 10 digits long.');
+      return;
+    }
+  }
+
+  if (ageRaw !== undefined && ageRaw !== '' && ageRaw !== null) {
+    if (isNaN(age) || age < 1 || age > 120) {
+      showInlineError('editProfileContainer', 'Invalid age. Please enter a valid number.');
+      return;
+    }
+  }
 
   const res = await fetch('/api/users/me', {
     method: 'PUT',
@@ -469,7 +686,7 @@ async function submitProfileEdit() {
       'Content-Type': 'application/json',
       ...getAuthHeader()
     },
-    body: JSON.stringify({ email, avatar_url, major, phone })
+    body: JSON.stringify({ email, avatar_url, major, phone, age })
   });
 
   const data = await res.json();
@@ -570,17 +787,19 @@ async function loadCourseDetails() {
   const card = document.getElementById('detailsCard');
   if (!card) return;
 
+  if (!isFavoritesFetched) await fetchUserFavoritesSet();
+
   const params = new URLSearchParams(window.location.search);
   const courseId = params.get('id');
 
   if (!courseId) {
-    card.innerHTML = `<div style="text-align: center; padding: 2rem;">Invalid course ID. <a href="/courses" style="color: var(--primary-indigo);">Back to courses</a></div>`;
+    card.innerHTML = `<div class="empty-box">Invalid course ID. <a href="/courses" style="color: var(--primary-indigo);">Back to courses</a></div>`;
     return;
   }
 
   const res = await fetch(`/api/courses/${courseId}`);
   if (!res.ok) {
-    card.innerHTML = `<div style="text-align: center; padding: 2rem;">Course not found. <a href="/courses" style="color: var(--primary-indigo);">Back to courses</a></div>`;
+    card.innerHTML = `<div class="empty-box">Course not found. <a href="/courses" style="color: var(--primary-indigo);">Back to courses</a></div>`;
     return;
   }
 
@@ -594,14 +813,23 @@ async function loadCourseDetails() {
     if (profileRes.ok) {
       const u = await profileRes.json();
       isEnrolled = (u.enrolled_courses || []).some(ec => ec.id === courseId);
+      if (u.favorite_course_ids) {
+        userFavoriteCourseIds = new Set(u.favorite_course_ids);
+        isFavoritesFetched = true;
+      }
     }
   }
 
+  const isFav = userFavoriteCourseIds.has(c.id);
+
   card.innerHTML = `
-    <div style="margin-bottom: 1.5rem;">
-      <a href="javascript:history.back()" style="color: var(--text-muted); text-decoration: none; font-size: 0.9rem; display: inline-flex; align-items: center; gap: 0.3rem; margin-bottom: 1rem;">← Back</a>
-      <h1 style="font-size: 2rem; font-weight: 800; margin-bottom: 0.5rem; color: var(--text-main);">${c.title}</h1>
-      <p style="color: var(--primary-indigo); font-weight: 600; font-size: 1.05rem;">Instructor: ${c.instructor}</p>
+    <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 1.5rem;">
+      <div>
+        <a href="javascript:history.back()" style="color: var(--text-muted); text-decoration: none; font-size: 0.9rem; display: inline-flex; align-items: center; gap: 0.3rem; margin-bottom: 1rem;">← Back</a>
+        <h1 style="font-size: 2rem; font-weight: 800; margin-bottom: 0.5rem; color: var(--text-main);">${c.title}</h1>
+        <p style="color: var(--primary-indigo); font-weight: 600; font-size: 1.05rem;">Instructor: ${c.instructor}</p>
+      </div>
+      <button type="button" onclick="toggleFavoriteCourse('${c.id}', this)" class="heart-btn ${isFav ? 'is-favorite' : ''}" style="margin-top: 1rem;" title="${isFav ? 'Remove from favorites' : 'Add to favorites'}">${isFav ? '❤️' : '🤍'}</button>
     </div>
 
     <div style="background: var(--subcard-bg); padding: 1.5rem; border-radius: var(--radius-md); border: 0.0625rem solid var(--border-glass); margin-bottom: 1.5rem;">

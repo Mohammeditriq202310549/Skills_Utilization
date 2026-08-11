@@ -8,8 +8,8 @@
 </head>
 <body>
   <nav class="navbar">
-    <a href="/" class="logo">Skill<span>Match</span></a>
-    <button onclick="toggleTheme()" class="btn-outline" style="padding: 0.4rem 0.85rem; font-size: 0.85rem; display: flex; align-items: center; gap: 0.4rem; border-radius: 2rem;" title="Toggle Dark / Light Mode">
+    <a href="/courses" class="logo">Skill<span>Match</span></a>
+    <button onclick="toggleTheme()" class="btn-theme-toggle" title="Toggle Dark / Light Mode">
       <span id="themeToggleIcon">🌙</span> <span id="themeToggleLabel">Dark</span>
     </button>
   </nav>
@@ -28,28 +28,28 @@
         </div>
         <div class="form-group">
           <label>Password</label>
-          <div style="position: relative;">
-            <input type="password" id="password" class="glow-input" required style="padding-right: 2.75rem;">
-            <button type="button" onclick="togglePasswordVisibility('password', this)" style="position: absolute; right: 0.75rem; top: 50%; transform: translateY(-50%); background: none; border: none; color: var(--text-muted); cursor: pointer; font-size: 1.1rem;" title="Toggle Password Visibility">👁️</button>
+          <div class="password-input-wrapper">
+            <input type="password" id="password" class="glow-input password-input-padded" required>
+            <button type="button" onclick="togglePasswordVisibility('password', this)" class="password-toggle-btn" title="Toggle Password Visibility">👁️</button>
           </div>
         </div>
         <div class="form-group">
           <label>Phone Number (Optional)</label>
-          <input type="tel" id="phone" class="glow-input" placeholder="+1 555-0199">
+          <input type="text" id="phone" class="glow-input" placeholder="0791234567" maxlength="10" inputmode="numeric">
         </div>
-        <div style="display: flex; gap: 1rem;">
-          <div class="form-group" style="flex: 1;">
+        <div class="form-row">
+          <div class="form-group form-col-1">
             <label>Age</label>
-            <input type="number" id="age" class="glow-input" min="15" max="100" placeholder="21">
+            <input type="text" id="age" class="glow-input" placeholder="21" maxlength="3" inputmode="numeric">
           </div>
-          <div class="form-group" style="flex: 2;">
+          <div class="form-group form-col-2">
             <label>Academic Major</label>
             <input type="text" id="major" class="glow-input" placeholder="Computer Science">
           </div>
         </div>
         <div class="form-group">
-          <label style="margin-bottom: 0.75rem; display: block;">Select Your Skills & Interests</label>
-          <div class="skill-chips-container" id="skillChips" style="display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 0.5rem;">
+          <label>Select Your Skills & Interests</label>
+          <div class="skill-chips-container" id="skillChips">
             <button type="button" class="skill-chip" data-skill="Frontend">⚡ Frontend</button>
             <button type="button" class="skill-chip" data-skill="Backend">⚙️ Backend</button>
             <button type="button" class="skill-chip" data-skill="Hacking">🛡️ Hacking / Cybersecurity</button>
@@ -62,11 +62,9 @@
           <input type="hidden" id="skillsInput" value="">
         </div>
 
-
-
-        <button type="submit" class="btn-indigo" style="width: 100%;">Register</button>
-        <div style="text-align: center; margin: 1.25rem 0 1rem 0; color: var(--text-muted); font-size: 0.875rem;">Already have an account?</div>
-        <a href="/login" class="btn-outline" style="display: block; text-align: center; width: 100%; text-decoration: none;">Log In Here</a>
+        <button type="submit" class="btn-indigo btn-full">Register</button>
+        <div class="auth-divider">Already have an account?</div>
+        <a href="/login" class="btn-outline btn-block-link">Log In Here</a>
       </form>
     </div>
 

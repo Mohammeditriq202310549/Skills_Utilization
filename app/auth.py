@@ -14,6 +14,37 @@ def validate_email(email: str) -> bool:
         return False
     return bool(re.match(EMAIL_REGEX, email.strip()))
 
+def validate_phone(phone: str) -> tuple[bool, str]:
+    """
+    Validates phone number:
+    - Must start with 079, 078, or 077
+    - Must be exactly 10 digits long
+    """
+    if not phone or not str(phone).strip():
+        return True, "Phone is optional"
+    
+    clean_phone = str(phone).strip()
+    if not re.match(r"^(077|078|079)\d{7}$", clean_phone):
+        return False, "Phone number must start with 077, 078, or 079 and be exactly 10 digits long"
+    return True, "Phone is valid"
+
+def validate_age(age) -> tuple[bool, str]:
+    """
+    Validates age:
+    - Must be a positive integer between 1 and 120
+    """
+    if age is None or str(age).strip() == "":
+        return True, "Age is optional"
+    
+    try:
+        age_int = int(age)
+        if age_int < 1 or age_int > 120:
+            return False, "Age must be a valid positive number between 1 and 120"
+    except (ValueError, TypeError):
+        return False, "Age must be a valid integer"
+    
+    return True, "Age is valid"
+
 def validate_password(password: str) -> tuple[bool, str]:
     """
     Validates password strength:

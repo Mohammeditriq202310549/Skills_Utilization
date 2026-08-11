@@ -82,3 +82,47 @@
   box-shadow: 0 0 0.875rem var(--primary-glow);
 }
 
+.password-input-wrapper {
+  position: relative;
+}
+
+.password-input-padded {
+  padding-right: 2.75rem;
+}
+
+.auth-divider {
+  text-align: center;
+  margin: 1.25rem 0 1rem 0;
+  color: var(--text-muted);
+  font-size: 0.875rem;
+}
+
+.btn-block-link {
+  display: block;
+  text-align: center;
+  width: 100%;
+  text-decoration: none;
+}
+
+.form-row {
+  display: flex;
+  gap: 1rem;
+}
+
+.form-col-1 {
+  flex: 1;
+}
+
+.form-col-2 {
+  flex: 2;
+}
+
+.skill-chips-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+
+
